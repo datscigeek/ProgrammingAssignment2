@@ -1,5 +1,5 @@
-#
-# This function takes 'x' as a parameter which has to be a matrix.
+
+# This function takes 'x' as a parameter which has to be a matrix
 makeCacheMatrix <- function(x = matrix()) {
 # reset 's' which is the solved matrix
 		s <- NULL
@@ -8,34 +8,35 @@ makeCacheMatrix <- function(x = matrix()) {
 				x <<- y
 				s <<- NULL
 		}
-#
+
 # get back the matrix
 		get <- function() x
 # set the solved matrix
 		setsolve <- function(solve) s <<- solve
 # get the stored version of the solved matrix
 		getsolve <- function() s
-# build an array of functions
+# build an array of  the functions above
 		list(	set				=		set,
 				get				=		get,
 				setsolve		=		setsolve,
 				getsolve		=		getsolve)
 
 }
-#
-# return a matrix that is the inverse of 'x'
+
+
+# This function solves 'x' which has to be a matrix
 cacheSolve <- function(x, ...) {
-# fetch stored calculation
+# try to fetch stored calculation
 		s <- x$getsolve()
 		if(!is.null(s)) {
 		message("getting cached data")
-# if there is one, returns it
+# if there is one, return it
 		return(s)
 		}
 		data <- x$get()
-# if not, calculate it
+# if there is not, calculate it
 		s <- solve(data, ...)
-# stores the result to cache
+# store the result to cache
 		x$setsolve(s)
 # return result
 		s
